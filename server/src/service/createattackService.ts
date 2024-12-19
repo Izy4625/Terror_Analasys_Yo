@@ -1,0 +1,45 @@
+import { handleAllCollections } from "./collectionService";
+import { AttackModel } from "../models/attackModle";
+import { attack } from "../types/attack"
+export const createAttack = async (newattack: attack) => {
+    const { eventid:
+        iyear,
+        imonth,
+        iday,
+        country_txt,
+        region_txt,
+        city,
+        latitude,
+        longitude,
+        attacktype1_txt,
+        targtype1_txt,
+        target1,
+        gname,
+        weaptype1_txt,
+        nkill,
+        nwound,
+        nperps,
+        summary } = newattack;
+
+         const newAttack = new AttackModel([
+        iyear,
+        imonth,
+        iday,
+        country_txt,
+        region_txt,
+        city,
+        latitude,
+        longitude,
+        attacktype1_txt,
+        targtype1_txt,
+        target1,
+        gname,
+        weaptype1_txt,
+        nkill,
+        nwound,
+        nperps,
+        summary
+    ])
+    await newAttack.save()
+    await handleAllCollections(newattack)
+}

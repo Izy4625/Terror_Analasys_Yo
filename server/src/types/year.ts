@@ -6,5 +6,5 @@ export interface month{
 
 export interface year{
     iyear: number,
-    months: [month]
+    months: month[]
 }

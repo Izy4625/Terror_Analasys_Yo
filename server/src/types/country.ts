@@ -1,8 +1,8 @@
 import { group } from "./group"
-
-export interface country{
+import { Document } from "mongoose"
+export interface country extends Document{
     cname: string,
     nkill: string,
     nwound: string,
-    tgoups: [group]
+    tgoups: group["_id"]
 }

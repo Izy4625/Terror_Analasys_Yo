@@ -1,7 +1,10 @@
-export interface attack{   
+import { Document } from "mongoose"
+
+export interface attack extends Document{   
         eventid: number,
-        iyea: number,
-        ida:number,
+        iyear: number,
+        imonth: number,
+        iday:number,
         country_txt: string,
         region_txt:string,
         city: string,

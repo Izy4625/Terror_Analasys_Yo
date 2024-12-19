@@ -8,7 +8,8 @@
       "esModuleInterop": true, // אפשור תאימות בין CommonJS ל-ES Modules
       "skipLibCheck": true, // דילוג על בדיקת טיפוסים של קבצי declaration (קבצי .d.ts)
       "noImplicitAny": true, // איסור על שימוש משתמע ב-any כברירת מחדל
-      "forceConsistentCasingInFileNames": true // אכיפת שימוש עקבי באותיות גדולות/קטנות בשמות קבצים
+      "forceConsistentCasingInFileNames": true ,// אכיפת שימוש עקבי באותיות גדולות/קטנות בשמות קבצים
+    "resolveJsonModule": true
     },
     "include": ["src"], // הוסף את התיקייה שמכילה את קבצי המקור שלך
   
