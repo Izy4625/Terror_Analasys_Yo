@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist", // תיקיית היעד שבה יאוחסנו הקבצים המקומפלים
+      "sourceMap": true, // יצירת קבצי source map לצורך debugging
+      "target": "ES2016", // המטרה לאחר קומפילציה (גרסת JavaScript)
+      "module": "commonjs", // שיטת הייצוא/ייבוא של מודולים
+      "strict": true, // הפעלת מצב "קפדני" לבדיקות טיפוסים מחמירות יותר
+      "esModuleInterop": true, // אפשור תאימות בין CommonJS ל-ES Modules
+      "skipLibCheck": true, // דילוג על בדיקת טיפוסים של קבצי declaration (קבצי .d.ts)
+      "noImplicitAny": true, // איסור על שימוש משתמע ב-any כברירת מחדל
+      "forceConsistentCasingInFileNames": true // אכיפת שימוש עקבי באותיות גדולות/קטנות בשמות קבצים
+    },
+    "include": ["src"], // הוסף את התיקייה שמכילה את קבצי המקור שלך
+  
+  }
