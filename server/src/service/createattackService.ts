@@ -2,7 +2,9 @@ import { handleAllCollections } from "./collectionService";
 import { AttackModel } from "../models/attackModle";
 import { attack } from "../types/attack"
 export const createAttack = async (newattack: attack) => {
-    const { eventid:
+    if(newattack.latitude === null || newattack.longitude === null) return
+    const { 
+        eventid,
         iyear,
         imonth,
         iday,
@@ -21,7 +23,7 @@ export const createAttack = async (newattack: attack) => {
         nperps,
         summary } = newattack;
 
-         const newAttack = new AttackModel([
+         const newAttack = new AttackModel({
         iyear,
         imonth,
         iday,
@@ -39,7 +41,7 @@ export const createAttack = async (newattack: attack) => {
         nwound,
         nperps,
         summary
-    ])
+})
     await newAttack.save()
     await handleAllCollections(newattack)
 }

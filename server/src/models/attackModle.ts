@@ -2,7 +2,7 @@ import { Schema,model } from "mongoose";
 import { attack } from "../types/attack";
 
 const attackSchema  = new Schema<attack>({
-     eventid: {type:Number, unique: true},
+     eventid: {type:Number},
      iyear: {type: Number},
      imonth: {type: Number},
      iday:{type:Number},

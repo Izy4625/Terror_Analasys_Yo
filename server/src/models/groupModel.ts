@@ -9,4 +9,4 @@ export const groupSchema = new Schema<group>({
 
 })
 
-export const GroupModel = model('Group', groupSchema)
+export const GroupModel = model('Groups', groupSchema)

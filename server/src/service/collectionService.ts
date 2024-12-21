@@ -4,7 +4,9 @@ import { group } from "../types/group";
 import { CountryModel } from "../models/countryModel";
 import { attack } from "../types/attack";
 import { year, month } from "../types/year"
+import { Types } from "mongoose";
 import { AttackTypeModel } from "../models/attackTypesModel";
+import { country } from "../types/country";
 
 
 const handleCountry = async (nattack: attack) => {
@@ -30,14 +32,16 @@ const handleCountry = async (nattack: attack) => {
 }
 
 const handleGroup = async (nattack: attack): Promise<group | undefined> => {
+    console.log(nattack)
     try {
         const tgroup = await GroupModel.findOne({ gname: nattack.gname })
         if (tgroup) {
             tgroup.nkill += nattack.nkill
             tgroup.nwound += nattack.nwound
             tgroup.aincidents += 1
-
+            console.log(tgroup)
             return await tgroup.save()
+           
 
         }
         else {
@@ -49,9 +53,15 @@ const handleGroup = async (nattack: attack): Promise<group | undefined> => {
             })
 
             await newGroup.save()
-            const findgroup = await CountryModel.findOne({ cname: nattack.country_txt }, { "tgroups._id": newGroup?._id })
-            if (!findgroup) {
-                await CountryModel.updateOne({ cname: nattack.country_txt }, { "tgroups._id": newGroup?._id }, { $push: { 'tgroups': newGroup?._id } })
+            console.log(newGroup)
+         
+            const findgroup : country |null= await CountryModel.findOne({ cname: nattack.country_txt})
+            if(findgroup && findgroup.tgroups.find((a)=>a===newGroup._id))
+             {  console.log("true inside handle cgroup")}
+          
+            else {
+               const newgroup = await CountryModel.findOneAndUpdate({ cname: nattack.country_txt }, { $push: { 'tgroups': newGroup?._id } },{new:true})
+               console.log("false adding a object id",newgroup)
             }
             return
         }
@@ -65,8 +75,13 @@ const handleYear = async (newattack: attack) => {
     try {
         const year = await YearStatsModel.findOne({ iyear: newattack.iyear });
         if (year) {
-            const month = await YearStatsModel.findOneAndUpdate({ iyear: newattack.iyear, 'months.imonth': newattack.imonth }, { $set: { 'months$.aincidents': +1 } }, { new: true });
+            if(newattack.imonth === 0) return
+            const month = await YearStatsModel.findOneAndUpdate({ iyear: newattack.iyear, 'months.imonth': newattack.imonth }, {$inc: {
+                "months.$.aincidents": 1}
+              }, { new: true });
+        
             if (!month?.months.find((a) => a.imonth === newattack.imonth)) {
+           
                 const brandnewmonth: month = {
                     imonth: newattack.imonth,
                     aincidents: 1
@@ -115,7 +130,7 @@ const handleAttackTypes = async (newattack: attack) => {
 
 export const handleAllCollections = async (newattack: attack) => {
     await handleAttackTypes(newattack);
-    await handleGroup(newattack);
     await handleCountry(newattack);
+    await handleGroup(newattack);
     await handleYear(newattack)
 }

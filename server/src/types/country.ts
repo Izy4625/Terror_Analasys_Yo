@@ -1,8 +1,8 @@
 import { group } from "./group"
-import { Document } from "mongoose"
+import { Document ,Types} from "mongoose"
 export interface country extends Document{
     cname: string,
-    nkill: string,
-    nwound: string,
-    tgoups: group["_id"]
+    nkill: number,
+    nwound: number,
+    tgroups: Types.ObjectId[]
 }

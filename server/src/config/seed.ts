@@ -1,12 +1,13 @@
-import data from "../../../server/data.json"
+import fs from "fs";
 import { createAttack } from "../service/createattackService";
-import * as fs from 'fs';
-import { attack } from "../types/attack";
-import { JsxEmit } from "typescript";
-export const  createSeed= async()=>{
-    const datastring = JSON.stringify(data)
-    const newdata: attack[] = JSON.parse(datastring)
-    for (let i = 0; i < newdata.length; i++) {
-        await createAttack(newdata[i]);
-      }
-}
+export const createSeed = async () => {
+  const data = JSON.parse(
+    fs.readFileSync("C:/Users/yisro/Downloads/Test_Sikum_FS/data.json", "utf8")
+  );
+
+  for (const item of data) {
+    await createAttack(item); // Process each item
+  }
+
+  console.log("All data processed.");
+};
