@@ -32,14 +32,14 @@ const handleCountry = async (nattack: attack) => {
 }
 
 const handleGroup = async (nattack: attack): Promise<group | undefined> => {
-    console.log(nattack)
+   
     try {
         const tgroup = await GroupModel.findOne({ gname: nattack.gname })
         if (tgroup) {
             tgroup.nkill += nattack.nkill
             tgroup.nwound += nattack.nwound
             tgroup.aincidents += 1
-            console.log(tgroup)
+         
             return await tgroup.save()
            
 
@@ -53,15 +53,15 @@ const handleGroup = async (nattack: attack): Promise<group | undefined> => {
             })
 
             await newGroup.save()
-            console.log(newGroup)
+           
          
             const findgroup : country |null= await CountryModel.findOne({ cname: nattack.country_txt})
             if(findgroup && findgroup.tgroups.find((a)=>a===newGroup._id))
-             {  console.log("true inside handle cgroup")}
+             {  }
           
             else {
                const newgroup = await CountryModel.findOneAndUpdate({ cname: nattack.country_txt }, { $push: { 'tgroups': newGroup?._id } },{new:true})
-               console.log("false adding a object id",newgroup)
+               
             }
             return
         }
