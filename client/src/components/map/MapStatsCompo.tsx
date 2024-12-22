@@ -1,6 +1,4 @@
-import { MapContainer } from 'react-leaflet'
-import { TileLayer } from 'react-leaflet'
-import { useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import {Marker} from 'react-leaflet'
 import { Popup } from 'react-leaflet'
 import styles from "./MapStatsCompo.module.css"
@@ -10,7 +8,6 @@ import {useState, useRef} from "react"
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import L from "leaflet";
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 interface region{
@@ -27,7 +24,7 @@ interface cordinates{
     lat: number
 }
 const MapStatsCompo = () => {
-    const mapRef = useRef(null);
+  const mapRef = useRef(null);
  const [cor, setCor] = useState<cordinates>({lon: 52.0873, lat: -9.075});
  const [lat, setLat] = useState<number>();
   const [query, setQuery] = useState('')
@@ -61,7 +58,6 @@ const MapStatsCompo = () => {
       }
   return (
    
-
 <div>
     <Box sx={{m: 1, minWidth: 160} }>
     <FormControl size="medium">
@@ -79,7 +75,7 @@ const MapStatsCompo = () => {
         </Select>
       </FormControl>
     </Box>
-     <MapContainer ref={mapRef} center={[cor.lon, cor.lat]} zoom={13} scrollWheelZoom={false}>
+     <MapContainer center={[cor.lon, cor.lat]} zoom={13} scrollWheelZoom={false}>
   <TileLayer  
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

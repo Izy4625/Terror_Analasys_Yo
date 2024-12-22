@@ -15,13 +15,19 @@ const handleCountry = async (nattack: attack) => {
         if (tcountry) {
             tcountry.nkill += nattack.nkill
             tcountry.nwound += nattack.nwound
+            tcountry.aincidents =+ 1
+            
             tcountry.save()
         }
         else {
             const newCountry = new CountryModel({
                 cname: nattack.country_txt,
                 nkill: nattack.nkill,
-                nwound: nattack.nwound
+                nwound: nattack.nwound,
+                latitude : nattack.latitude,
+                longitude : nattack.longitude,
+                aincidents: 1
+                
             })
             newCountry.save()
         }
