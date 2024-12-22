@@ -13,6 +13,6 @@ const countrySchema = new Schema<country>({
        tgroups:  [{ type: Schema.Types.ObjectId, ref: 'Groups' }]
 })
 countrySchema.pre("save",function(){
-        this.average = this.nkill + (this.nwound / 5) / this.aincidents
+        this.average = (this.nkill + (this.nwound / 5)) / this.aincidents
 })
 export const CountryModel = model('Country', countrySchema)

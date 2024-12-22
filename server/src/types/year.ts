@@ -1,6 +1,8 @@
+import { Types } from "mongoose"
+
 export interface month{
     imonth: number,
-    aincidents: number
+    aincidentsOfEachType: Types.ObjectId[]
 }
 
 

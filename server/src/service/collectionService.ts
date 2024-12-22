@@ -16,7 +16,7 @@ const handleCountry = async (nattack: attack) => {
             tcountry.nkill += nattack.nkill
             tcountry.nwound += nattack.nwound
             tcountry.aincidents += 1
-            
+
             tcountry.save()
         }
         else {
@@ -24,10 +24,10 @@ const handleCountry = async (nattack: attack) => {
                 cname: nattack.country_txt,
                 nkill: nattack.nkill,
                 nwound: nattack.nwound,
-                latitude : nattack.latitude,
-                longitude : nattack.longitude,
+                latitude: nattack.latitude,
+                longitude: nattack.longitude,
                 aincidents: 1
-                
+
             })
             newCountry.save()
         }
@@ -38,16 +38,16 @@ const handleCountry = async (nattack: attack) => {
 }
 
 const handleGroup = async (nattack: attack): Promise<group | undefined> => {
-   
+
     try {
         const tgroup = await GroupModel.findOne({ gname: nattack.gname })
         if (tgroup) {
             tgroup.nkill += nattack.nkill
             tgroup.nwound += nattack.nwound
             tgroup.aincidents += 1
-         
+
             return await tgroup.save()
-           
+
 
         }
         else {
@@ -59,15 +59,14 @@ const handleGroup = async (nattack: attack): Promise<group | undefined> => {
             })
 
             await newGroup.save()
-           
-         
-            const findgroup : country |null= await CountryModel.findOne({ cname: nattack.country_txt})
-            if(findgroup && findgroup.tgroups.find((a)=>a===newGroup._id))
-             {  }
-          
+
+
+            const findgroup: country | null = await CountryModel.findOne({ cname: nattack.country_txt })
+            if (findgroup && findgroup.tgroups.find((a) => a === newGroup._id)) { }
+
             else {
-               const newgroup = await CountryModel.findOneAndUpdate({ cname: nattack.country_txt }, { $push: { 'tgroups': newGroup?._id } },{new:true})
-               
+                const newgroup = await CountryModel.findOneAndUpdate({ cname: nattack.country_txt }, { $push: { 'tgroups': newGroup?._id } }, { new: true })
+
             }
             return
         }
@@ -80,31 +79,46 @@ const handleGroup = async (nattack: attack): Promise<group | undefined> => {
 const handleYear = async (newattack: attack) => {
     try {
         const year = await YearStatsModel.findOne({ iyear: newattack.iyear });
+        const attackType = await AttackTypeModel.findOne({ atype: newattack.attacktype1_txt })
+
         if (year) {
-            if(newattack.imonth === 0) return
-            const month = await YearStatsModel.findOneAndUpdate({ iyear: newattack.iyear, 'months.imonth': newattack.imonth }, {$inc: {
-                "months.$.aincidents": 1}
-              }, { new: true });
-        
-            if (!month?.months.find((a) => a.imonth === newattack.imonth)) {
-           
+            if (newattack.imonth === 0) return
+
+
+            const month: year | null = await YearStatsModel.findOne({ iyear: newattack.iyear, 'months.imonth': newattack.imonth })
+
+
+            const tmonth = month?.months?.find((mon) => mon.imonth === newattack.imonth);
+            if (month && attackType && tmonth?.aincidentsOfEachType.find((a) => a === attackType._id)) { }
+            else if (month && attackType) {
+                const addmonthtoyear: year | null = await YearStatsModel.findOneAndUpdate({ iyear: newattack.iyear, 'months.imonth': newattack.imonth }, {
+                    $push: {
+                        "months.$.aincidentsOfEachType": attackType?._id
+                    }
+                }, { new: true });
+            }
+
+            else if (attackType) {
+
                 const brandnewmonth: month = {
                     imonth: newattack.imonth,
-                    aincidents: 1
+                    aincidentsOfEachType: [attackType?._id]
                 }
                 const newMonth = await YearStatsModel.findOneAndUpdate({ iyear: newattack.iyear }, { $push: { months: brandnewmonth } }, { new: true })
             }
         }
         else {
-            const brandnewmonth: month[] = [{
-                imonth: newattack.imonth,
-                aincidents: 1
-            }]
-            const newYear = new YearStatsModel({
-                iyear: newattack.iyear,
-                months: brandnewmonth
-            })
-            return await newYear.save()
+            if (attackType) {
+                const brandnewmonth: month[] = [{
+                    imonth: newattack.imonth,
+                    aincidentsOfEachType: [attackType?._id]
+                }]
+                const newYear = new YearStatsModel({
+                    iyear: newattack.iyear,
+                    months: brandnewmonth
+                })
+                return await newYear.save()
+            }
         }
     }
     catch (err) {
@@ -118,13 +132,15 @@ const handleAttackTypes = async (newattack: attack) => {
         if (attacktype) {
             attacktype.nkill += newattack.nkill;
             attacktype.nwound += newattack.nwound;
+            attacktype.aincidents += 1
             return await attacktype.save()
         }
         else {
             const aType = new AttackTypeModel({
                 atype: newattack.attacktype1_txt,
                 nkill: newattack.nkill,
-                nwound: newattack.nwound
+                nwound: newattack.nwound,
+                aincidents: 1
             })
             return await aType.save()
         }
