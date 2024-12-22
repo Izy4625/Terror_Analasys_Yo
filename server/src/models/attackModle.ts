@@ -22,4 +22,5 @@ const attackSchema  = new Schema<attack>({
      summary: {type:String},
 
 })
+attackSchema.index({ attacktype1_txt: 'text', summary: 'text',country_txt: 'text' });
 export const AttackModel = model('Attack', attackSchema)

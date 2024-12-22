@@ -8,7 +8,7 @@ function App() {
  
   return (
     <>
-    <Top5_Countries/>
+    <MapStatsCompo/>
     </>
   )
 }

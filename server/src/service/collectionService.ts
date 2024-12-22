@@ -90,7 +90,7 @@ const handleYear = async (newattack: attack) => {
 
             const tmonth = month?.months?.find((mon) => mon.imonth === newattack.imonth);
             if (month && attackType && tmonth?.aincidentsOfEachType.find((a) => a === attackType._id)) { }
-            else if (month && attackType) {
+            else if (tmonth && attackType) {
                 const addmonthtoyear: year | null = await YearStatsModel.findOneAndUpdate({ iyear: newattack.iyear, 'months.imonth': newattack.imonth }, {
                     $push: {
                         "months.$.aincidentsOfEachType": attackType?._id
