@@ -32,23 +32,24 @@ const Top5_Countries = () => {
 
     return (
 
-        <MapContainer center={[-89.176269, 37.005105]} zoom={20} scrollWheelZoom={false}>
-            <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+        <MapContainer center={[37.005105,-89.176269]} zoom={13} scrollWheelZoom={false}>
+             <TileLayer  
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  />
             {data.map((mark)=>(
-                <Marker position={[mark.longitude, mark.latitude]}>
+                <Marker position={[mark.latitude, mark.longitude]}>
                     <Popup>
-                        nkill
+                        Country : {mark.cname} <br/>
+                        Amount Killed : {mark.nkill} <br/>
+                        Amount Injured : {mark.nwound} <br/>
+                        Total Incidents : {mark.aincidents} <br/>
+                        Average Casualties per incident : `{mark.average * 100}%`
+
                     </Popup>
                 </Marker>
             ))}
-<Marker position={[51.505, -0.09]}>
-    <Popup>
-      A pretty CSS3 popup. <br /> Easily customizable.
-    </Popup>
-  </Marker>
+
 
         </MapContainer>
 

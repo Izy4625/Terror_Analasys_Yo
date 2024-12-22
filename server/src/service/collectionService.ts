@@ -15,7 +15,7 @@ const handleCountry = async (nattack: attack) => {
         if (tcountry) {
             tcountry.nkill += nattack.nkill
             tcountry.nwound += nattack.nwound
-            tcountry.aincidents =+ 1
+            tcountry.aincidents += 1
             
             tcountry.save()
         }
