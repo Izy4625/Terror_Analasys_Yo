@@ -1,5 +1,6 @@
 import { AttackTypeModel } from "../models/attackTypesModel"
 import { CountryModel } from "../models/countryModel"
+import { YearStatsModel } from "../models/yearStatsMOdel"
 
 export const get_attack_type_service = async (types?: string[]) => {
     try {
@@ -30,4 +31,14 @@ export const get_top5_countries = async()=>{
         throw err
     }
     
+}
+export const get_incident_trends = async(year: number,months: number)=>{
+    try{
+        const data = YearStatsModel.findOne({iyear: year}).populate('months.aincidentsOfEachType' , 'aincidents atype -_id').exec()
+        return data
+    }
+    catch (err) {
+        console.log(err)
+        throw err
+    }
 }

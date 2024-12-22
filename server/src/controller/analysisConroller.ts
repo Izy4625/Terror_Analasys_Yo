@@ -1,4 +1,4 @@
-import { get_attack_type_service, get_top5_countries } from "../service/analysisService";
+import { get_attack_type_service, get_top5_countries ,get_incident_trends} from "../service/analysisService";
 
 import { Request, Response ,NextFunction} from "express";
 export const get_attack_type_controller =async (req: Request,res: Response, next: NextFunction)=>{
@@ -28,6 +28,18 @@ export const get_top5_countries_controller = async(req: Request,res: Response, n
     }
     catch(err){
         console.log("err getting top 5 countries" ,err)
+       next(err)
+    }
+}
+
+export const get_incident_trend_controller = async(req: Request,res: Response, next: NextFunction)=>{
+      try{
+        const data =await get_incident_trends(1971,5);
+        console.log(data)
+        res.json(data)
+      }
+      catch(err){
+        console.log("err getting incidents trending" ,err)
        next(err)
     }
 }
