@@ -1,5 +1,22 @@
-.map{
-    height: 300px;
-    width: 100%;
-    
-}
+.popupcontainer {
+    font-size: 12px; /* Reduce font size */
+    max-width: 200px; /* Make the width smaller */
+    max-height: 250px; /* Make the height smaller */
+    padding: 10px; /* Reduce padding */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    line-height: 1.4; /* Make text more compact */
+  }
+  
+  .popupcontainer h4 {
+    font-size: 14px; /* Smaller header */
+    margin-bottom: 10px;
+  }
+  
+  .popupcontainer p {
+    margin: 5px 0; /* Reduce space between paragraphs */
+  }
+  
+  .popupcontainer strong {
+    font-weight: bold; /* Keep strong text bold for clarity */
+  }
+  

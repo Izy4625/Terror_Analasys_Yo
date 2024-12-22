@@ -4,8 +4,8 @@ import { Request, Response ,NextFunction} from "express";
 export const get_search_keywords_controller = async (req: Request,res: Response, next: NextFunction) => {
     try{
         console.log('got tp the contorller')
-        const {query} = req.params
-        
+        console.log(req.body)
+        const {query} = req.body
         const data1 = await get_search_keywords(query);
         console.log(data1)
         res.json(data1)
