@@ -8,6 +8,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { attack } from '../../types/attack';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import AttackList from './attaclListCompo';
+import FormWithDialog from './createFormCompo';
 const AttackPage = () => {
     const [kewWords, setKewWords] = useState<string[]>([])
     const [data, setData] = useState<attack[]>([])
@@ -48,7 +49,8 @@ const AttackPage = () => {
        
       },[kewWords])
   return (
-    <div>
+    <>
+    <div className='headercontainer'>
             <div>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
@@ -73,12 +75,14 @@ const AttackPage = () => {
       </FormControl>
     </div>
     <div>
-        
+        <FormWithDialog/>
+    </div>
     </div>
         <div>
           <AttackList attacks={data}/>
         </div>
-    </div>
+    
+    </>
   )
 }
 
