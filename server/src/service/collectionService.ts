@@ -127,6 +127,7 @@ const handleYear = async (newattack: attack) => {
 
 }
 const handleAttackTypes = async (newattack: attack) => {
+    
     try {
         const attacktype = await AttackTypeModel.findOne({ atype: newattack.attacktype1_txt })
         if (attacktype) {

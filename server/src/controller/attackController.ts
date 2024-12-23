@@ -1,6 +1,7 @@
 import { get_search_keywords } from "../service/attackService";
 import { Request, Response ,NextFunction} from "express";
 import { createAttack } from "../service/createattackService";
+import { attack } from "../types/attack";
 export const get_search_keywords_controller = async (req: Request,res: Response, next: NextFunction) => {
     try{
         console.log('got tp the contorller')
@@ -17,6 +18,8 @@ export const get_search_keywords_controller = async (req: Request,res: Response,
 }
 export const create_new_attack_controller = async(req: Request,res: Response, next: NextFunction) =>{
     try{
+          console.log('got to the controller for creating new attack', req.body)
+          
             const data = await createAttack(req.body);
             console.log(data)
             res.json(data)

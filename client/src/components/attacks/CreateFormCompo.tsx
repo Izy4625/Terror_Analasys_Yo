@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-
 import { attack } from '../../types/attack'
 import Grid from '@mui/material/Grid2';
 const FormWithDialog: React.FC = () => {
-  // State for controlling the dialog visibility
+  
   const [open, setOpen] = useState(false);
 
-  // State for form values
+  
   const [formValues, setFormValues] = useState<attack>({
     eventid: 0,
     iyear: 0,
@@ -29,11 +28,10 @@ const FormWithDialog: React.FC = () => {
     summary: '',
   });
 
-  // Open and close the dialog
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // Handle change in form fields
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({
@@ -42,27 +40,36 @@ const FormWithDialog: React.FC = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form values:', formValues);
-    handleClose(); // Close the dialog after form submission
+    const res = await fetch('http://localhost:3001/api/attacks/create',{
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+      });
+      const data = await res.json();
+      console.log(data)
+    handleClose();
   };
+
 
   return (
     <div>
-      {/* Button to open the form in the dialog */}
+     
       <Button variant="contained" color="primary" onClick={handleOpen}>
         +
       </Button>
 
-      {/* Dialog that contains the form */}
+   
       <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth>
-        <DialogTitle>Submit Attack Data</DialogTitle>
+        <DialogTitle> Create New Attack </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
-              {/* Country */}
+            
               <Grid container spacing={2}>
                 <TextField
                   label="Country"
@@ -74,7 +81,7 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Group Name */}
+  
               <Grid container spacing={2}>
                 <TextField
                   label="Group Name"
@@ -86,7 +93,6 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Latitude */}
               <Grid container spacing={2}>
                 <TextField
                   label="Latitude"
@@ -99,7 +105,6 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Longitude */}
               <Grid container spacing={2}>
                 <TextField
                   label="Longitude"
@@ -112,7 +117,6 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Attack Type */}
               <Grid container spacing={2}>
                 <TextField
                   label="Attack Type"
@@ -123,7 +127,6 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Target Type */}
               <Grid container spacing={2}>
                 <TextField
                   label="Target Type"
@@ -134,7 +137,7 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Target */}
+          
               <Grid container spacing={2}>
                 <TextField
                   label="Target"
@@ -145,7 +148,7 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Weapons Type */}
+         
               <Grid container spacing={2}>
                 <TextField
                   label="Weapon Type"
@@ -156,7 +159,6 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Number Killed */}
               <Grid container spacing={2}>
                 <TextField
                   label="Number Killed"
@@ -168,7 +170,7 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Number Wounded */}
+            
               <Grid container spacing={2}>
                 <TextField
                   label="Number Wounded"
@@ -180,7 +182,7 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Number of Perpetrators */}
+             
               <Grid container spacing={2}>
                 <TextField
                   label="Number of Perpetrators"
@@ -192,7 +194,6 @@ const FormWithDialog: React.FC = () => {
                 />
               </Grid>
 
-              {/* Summary */}
               <Grid container spacing={2}>
                 <TextField
                   label="Summary"
