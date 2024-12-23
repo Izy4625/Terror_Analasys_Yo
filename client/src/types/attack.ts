@@ -1,6 +1,6 @@
-import { Document } from "mongoose"
 
-export interface attack extends Document{   
+
+export interface attack {   
         eventid: number,
         iyear: number,
         imonth: number,
