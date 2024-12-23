@@ -176,7 +176,7 @@ const MapStatsCompo = () => {
         try {
           const longString: string |undefined= kewWords?.join(' ')
           if(!longString) return
-          const res = await fetch('http://localhost:3001/api/attacks/all/search',{
+          const res = await fetch('https://terror-analasys-yo.onrender.com/api/attacks/all/search',{
             method: 'post',
             headers: {
               'Content-type': 'application/json',
@@ -239,7 +239,7 @@ const MapStatsCompo = () => {
         </Select>
       </FormControl>
     </div>
-     <MapContainer center={[cor.lon, cor.lat]} zoom={13} scrollWheelZoom={false}>
+     <MapContainer center={[49.3884,-125.0]} zoom={2} scrollWheelZoom={false}>
   <TileLayer  
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

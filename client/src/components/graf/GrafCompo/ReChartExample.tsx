@@ -8,7 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   Rectangle,
   ResponsiveContainer,
 } from "recharts";
@@ -19,13 +18,12 @@ export default function ExampleRechart() {
     const [dataKey, setDataKey] = useState<string>('')
     const [dataKey1, setDataKey1] = useState<string>('')
     const [dataKey2, setDataKey2] = useState<string>('')
-    const [query, setQuery] = useState<number>()
-    const [data, setData] = useState<attackTypes[] | year[]>([])
+    const [data, setData] = useState<attackTypes[]>([])
    
     const [isLoading, setIsLoading] = useState(true)
     const getAttackTypesData = async () => {
         try {
-            const res = await fetch('http://localhost:3001/api/analysis/deadliest-attack-types');
+            const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/deadliest-attack-types');
             const data = await res.json();
             setData(data);
             setDataKey('atype')
@@ -49,12 +47,12 @@ export default function ExampleRechart() {
         }
     };
     useEffect(()=>{
-        if(query === 1){
-        getAttackTypesData()}
-        else if(query === 2){
-            getIncidentsTrendsData()
-        }
-    },[query])
+       
+        getAttackTypesData()
+        
+           
+        
+    },[])
   
     useEffect(()=>{
         console.log(data)
@@ -69,39 +67,38 @@ export default function ExampleRechart() {
                 justifyContent: 'center',
             }}
         >
-                <input type='number' onChange={(e)=>setQuery(Number(e.currentTarget.value))} value={query} placeholder="Put In number of query"/>
+                
             <CircularProgress/>
-        </div>
+            </div>
+        
     ) :(
-    <>
-    <input type='number' onChange={(e)=>setQuery(Number(e.currentTarget.value))} value={query} placeholder="Put In number of query"/>
-    <ResponsiveContainer width={"100%"} height={'100%'}>
+    <ResponsiveContainer width={"100%"} height={'100%'} minHeight={500}>
       <BarChart
         data={data}
         margin={{
           top: 30,
           right: 30,
           left: 20,
-          bottom: 5,
+          bottom: 50,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey={dataKey}/>
+        <XAxis dataKey='atype' angle={20} fontSize={12} tickMargin={30}/>
         <YAxis />
         <Tooltip />
         <Bar
-          dataKey={dataKey1}
+          dataKey='nkill'
           fill="#B3CDAD"
           activeBar={<Rectangle fill="pink" stroke="blue" />}
         />
       <Bar
-          dataKey={dataKey2}
+          dataKey='nwound'
           fill="#FF5F5E"
           activeBar={<Rectangle fill="gold" stroke="purple" />}
         /> 
 
       </BarChart>
     </ResponsiveContainer>
-    </>
+  
   );
 }
