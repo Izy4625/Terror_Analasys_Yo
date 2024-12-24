@@ -2,6 +2,7 @@ import { handleAllCollections } from "./collectionService";
 import { AttackModel } from "../models/attackModle";
 import { attack } from "../types/attack"
 export const createAttack = async (newattack: attack) => {
+    
     if(newattack.latitude === null || newattack.longitude === null) return
     const { 
         eventid,

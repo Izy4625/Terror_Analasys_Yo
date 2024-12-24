@@ -3,9 +3,10 @@ import { AttackModel } from '../models/attackModle';
 import { createSeed } from './seed';
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect("mongodb+srv://yisroelgold3:KDl5gerHaHl1DowG@izyg.7q5uv.mongodb.net/globalterrorist123" );
+        const conn = await mongoose.connect("mongodb+srv://yisroelgold3:KDl5gerHaHl1DowG@izyg.7q5uv.mongodb.net/globalterrrorisem" );
         console.log(`MongoDB Connected: ${conn.connection.host}`);
         const attacks = await AttackModel.findOne({});
+        
         if(!attacks){
             await createSeed();
             console.log('[Settings] seed created')

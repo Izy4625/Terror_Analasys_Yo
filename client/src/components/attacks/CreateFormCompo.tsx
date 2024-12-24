@@ -43,7 +43,7 @@ const FormWithDialog: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form values:', formValues);
-    const res = await fetch('http://localhost:3001/api/attacks/create',{
+    const res = await fetch('https://terror-analasys-yo.onrender.com/api/attacks/create',{
         method: 'post',
         headers: {
           'Content-type': 'application/json',
