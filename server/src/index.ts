@@ -7,12 +7,13 @@ import attackRouter from './routes/attacks.route';
 const app = express();
 connectDB()
 
-app.use(
-    cors({
-      origin:["http://localhost:5173" ,'https://client-anlaysis.onrender.com',"*"],
-      credentials: true,
-    })
-  );
+// app.use(
+//     cors({
+//       origin:["http://localhost:5173" ,'https://client-anlaysis.onrender.com',"*"],
+//       credentials: true,
+//     })
+//   );
+  app.use(cors())
 app.use(express.json());
 app.use('/api/analysis',analysisRoute)
 app.use('/api/attacks', attackRouter)
