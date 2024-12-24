@@ -9,7 +9,7 @@ connectDB()
 
 app.use(
     cors({
-      origin:["http://localhost:5173" ,'https://your-client-domain.com',"*"],
+      origin:["http://localhost:5173" ,'https://client-anlaysis.onrender.com/',"*"],
       credentials: true,
     })
   );
