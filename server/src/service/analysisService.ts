@@ -42,9 +42,16 @@ export const get_incident_trends = async(year: number,months: number)=>{
         throw err
     }
 }
-export const get_top5_groups = async(area: string)=>{
+export const get_top5_groups = async(area: string,limit?:number)=>{
     try{
-        const data = await CountryModel.find({cname: area}).populate('tgroups' ,{ sort: { 'aincidents': -1 } }).exec()
+        if(limit){
+        const data = await CountryModel.find({cname: area}).populate('tgroups' ,{ sort: { 'aincidents': -1 } }).limit(limit * 2).exec()
+        return data
+    }
+    else{
+        const data = await CountryModel.find({cname: area}).populate('tgroups' ,{ sort: { 'aincidents': -1 } }).limit(5).exec()
+        return data
+    }
     }
     catch (err) {
         console.log(err)
