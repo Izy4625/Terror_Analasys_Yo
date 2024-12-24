@@ -42,3 +42,12 @@ export const get_incident_trends = async(year: number,months: number)=>{
         throw err
     }
 }
+export const get_top5_groups = async(area: string)=>{
+    try{
+        const data = await CountryModel.find({cname: area}).populate('tgroups' ,{ sort: { 'aincidents': -1 } }).exec()
+    }
+    catch (err) {
+        console.log(err)
+        throw err
+    }
+}
