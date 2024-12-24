@@ -15,7 +15,7 @@ export default function Demo() {
     const [isLoading, setIsLoading] = useState(true)
     const getAttackTypesData = async () => {
         try {
-            const res = await fetch('http://localhost:3001/api/analysis/deadliest-attack-types');
+            const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/deadliest-attack-types');
             const data = await res.json();
             setData(data);
             setIsLoading(false);

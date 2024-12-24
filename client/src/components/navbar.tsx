@@ -24,7 +24,7 @@ const Navbar = () => {
         <Box>
        
           {pages.map((page,index)=>(
-            <Button color='inherit' onClick={()=>{handlenavigate(page.path)}} key={index}>
+            <Button color='inherit'href={page.path} key={index}>
                 {page.display}
             </Button>
           ))}

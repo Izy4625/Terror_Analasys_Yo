@@ -16,7 +16,7 @@ export const pages = [
     display: 'mapstats',
   },
   {
-    path: '',
+    path: '/',
     element: <AttackPage />,
     display: 'Attacks',
   },

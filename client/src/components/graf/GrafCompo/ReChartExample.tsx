@@ -36,7 +36,7 @@ export default function ExampleRechart() {
     };
     const getIncidentsTrendsData = async () => {
         try {
-            const res = await fetch('http://localhost:3001/api/analysis/incident-trends');
+            const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/incident-trends');
             const data = await res.json();
             setData(data);
             setDataKey(`iyear`)
