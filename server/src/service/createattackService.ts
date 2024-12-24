@@ -23,6 +23,8 @@ export const createAttack = async (newattack: attack) => {
         nwound,
         nperps,
         summary } = newattack;
+        const nk = Number(nkill);
+        const nw = Number(nwound);
 
          const newAttack = new AttackModel({
         iyear,
@@ -38,8 +40,8 @@ export const createAttack = async (newattack: attack) => {
         target1,
         gname,
         weaptype1_txt,
-        nkill,
-        nwound,
+        nk,
+        nw,
         nperps,
         summary
 })

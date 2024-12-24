@@ -7,6 +7,7 @@ import { year, month } from "../types/year"
 import { Types } from "mongoose";
 import { AttackTypeModel } from "../models/attackTypesModel";
 import { country } from "../types/country";
+import { attackTypes } from "../types/attackTypes";
 
 
 const handleCountry = async (nattack: attack) => {
@@ -127,15 +128,24 @@ const handleYear = async (newattack: attack) => {
 
 }
 const handleAttackTypes = async (newattack: attack) => {
-    
+    console.log(newattack)
     try {
-        const attacktype = await AttackTypeModel.findOne({ atype: newattack.attacktype1_txt })
-        if (attacktype) {
-            attacktype.nkill += newattack.nkill;
-            attacktype.nwound += newattack.nwound;
-            attacktype.aincidents += 1
-            return await attacktype.save()
-        }
+            const updatedAttackType = await AttackTypeModel.findOneAndUpdate(
+                { atype: newattack.attacktype1_txt }, // Match the document by the attacktype
+                {
+                    $inc: {
+                        nkill: newattack.nkill,  // Increment nkill by the value from newattack
+                        nwound: newattack.nwound, // Increment nwound by the value from newattack
+                        aincidents: 1             // Increment aincidents by 1
+                    }
+                },
+                { new: true } // Return the updated document
+            );
+        
+             if(updatedAttackType){
+                return updatedAttackType
+             }
+        
         else {
             const aType = new AttackTypeModel({
                 atype: newattack.attacktype1_txt,
