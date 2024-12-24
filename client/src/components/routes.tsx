@@ -1,12 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import FormComponent from './attacks/createFormCompo';
-import { attack } from '../types/attack';
+
+
 import MapStatsCompo from  "../components/map/MapStatsCompo"
-import BarsDataset from '../components/graf/GrafCompo/AttackTypesCompo'
+
 import Top5_Countries from '../components/map/Top5_Countries';
 import ExampleRechart from '../components/graf/GrafCompo/ReChartExample';
-import ResponsiveDrawer from "./components/navbar";
-import { Routes, Route } from 'react-router-dom';
 import AttackPage from '../components/attacks/attackPage';
 
 export const pages = [

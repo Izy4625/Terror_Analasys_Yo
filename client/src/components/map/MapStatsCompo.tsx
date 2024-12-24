@@ -1,20 +1,20 @@
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
 import { Marker } from 'react-leaflet'
 import { Popup } from 'react-leaflet'
 import { searchKeywords } from '../../utils/listKeyWords'
 import "leaflet/dist/leaflet.css"
 import './styles.css'
 import { attack } from '../../types/attack'
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Theme, useTheme } from '@mui/material/styles';
+
 import OutlinedInput from '@mui/material/OutlinedInput';
 import styles from "./MapStatsCompo.module.css"
-import FormComponent from '../attacks/UpdateFormCompo'
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -27,24 +27,12 @@ const MenuProps = {
 };
 
 
-interface region {
-  name: string,
-  casualties: number,
-  incidents: number,
-  lat: number,
-  long: number
-  ave: number
-}
 
-interface cordinates {
-  lon: number,
-  lat: number
-}
+
 const MapStatsCompo = () => {
-  const [flag, setFlag] = useState(true)
+
   const [data, setData] = useState<attack[]>([])
-  const [cor, setCor] = useState<cordinates>({ lon: 52.0873, lat: -9.075 });
-  const [lat, setLat] = useState<number>();
+
   const [kewWords, setKewWords] = useState<string[]>([])
   const [query, setQuery] = useState('')
 
@@ -62,19 +50,14 @@ const MapStatsCompo = () => {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
-  const cord: cordinates = {
-    lon: 46.2276,
-    lat: 2.437
-  }
+
   const handleChange = (event: SelectChangeEvent) => {
     console.log('inside hadleChange')
     setQuery(event.target.value as string);
     // mapRef.current?.panTo(new L.LatLng(40.737, -73.923));
-    setCor(cord)
+   
   };
-  function handleOnSetView() {
 
-  }
   const getAllByKewWords = async () => {
     try {
       const longString: string | undefined = kewWords?.join(' ')

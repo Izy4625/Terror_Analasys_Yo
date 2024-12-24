@@ -12,16 +12,15 @@ import { useState, useEffect } from "react"
 
 const Top5_Countries = () => {
     const [data, setData] = useState<country[]>([])
-    const [names, setNames] = useState<string[]>([])
-    const [isLoading, setIsLoading] = useState(true)
+  
     const get_Top5_Countries = async () => {
         try {
             const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/highest-casualty-countries');
             const data = await res.json();
             setData(data);
-            setIsLoading(false);
+            // setIsLoading(false);
         } catch (err) {
-            setIsLoading(false);
+            // setIsLoading(false);
         }
     };
     useEffect(() => {

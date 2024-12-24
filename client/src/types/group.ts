@@ -1,6 +1,6 @@
-import { Document } from "mongoose"
 
-export interface group extends Document{
+
+export interface group{
     gname: string,
     aincidents: number,
     nkill: number,

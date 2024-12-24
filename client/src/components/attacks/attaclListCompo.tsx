@@ -7,7 +7,7 @@ const AttackList: React.FC<{ attacks: attack[] }> = ({ attacks }) => {
     return (
       <Grid container spacing={3} style={{ padding: '16px' }}>
         {attacks.map((attack, index) => (
-          <Grid container spacing={2}>
+          <Grid container spacing={2} key={index}>
             <AttackCard attack={attack} />
           </Grid>
         ))}

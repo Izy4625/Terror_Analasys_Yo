@@ -1,6 +1,6 @@
 import { useState ,useEffect} from 'react';
 import { searchKeywords } from '../../utils/listKeyWords';
-import Box from '@mui/material/Box';
+
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -8,7 +8,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { attack } from '../../types/attack';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import AttackList from './attaclListCompo';
-import FormWithDialog from './createFormCompo';
+import FormWithDialog from './CreateFormCompo';
 const AttackPage = () => {
     const [kewWords, setKewWords] = useState<string[]>([])
     const [data, setData] = useState<attack[]>([])

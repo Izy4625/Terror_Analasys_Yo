@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import { attackTypes } from "../../../types/attackTypes";
-import { year } from "../../../types/year";
+
 import {
   BarChart,
   Bar,
@@ -15,9 +15,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function ExampleRechart() {
-    const [dataKey, setDataKey] = useState<string>('')
-    const [dataKey1, setDataKey1] = useState<string>('')
-    const [dataKey2, setDataKey2] = useState<string>('')
+
     const [data, setData] = useState<attackTypes[]>([])
    
     const [isLoading, setIsLoading] = useState(true)
@@ -26,26 +24,24 @@ export default function ExampleRechart() {
             const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/deadliest-attack-types');
             const data = await res.json();
             setData(data);
-            setDataKey('atype')
-            setDataKey1('nkill')
-            setDataKey2('nwound')
+         
             setIsLoading(false);
         } catch (err) {
             setIsLoading(false);
         }
     };
-    const getIncidentsTrendsData = async () => {
-        try {
-            const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/incident-trends');
-            const data = await res.json();
-            setData(data);
-            setDataKey(`iyear`)
-            setDataKey1('aincsedents')
-            setIsLoading(false);
-        } catch (err) {
-            setIsLoading(false);
-        }
-    };
+    // const getIncidentsTrendsData = async () => {
+    //     try {
+    //         const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/incident-trends');
+    //         const data = await res.json();
+    //         setData(data);
+    //         setDataKey(`iyear`)
+    //         setDataKey1('aincsedents')
+    //         setIsLoading(false);
+    //     } catch (err) {
+    //         setIsLoading(false);
+    //     }
+    // };
     useEffect(()=>{
        
         getAttackTypesData()

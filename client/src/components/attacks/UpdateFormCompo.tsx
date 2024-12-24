@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, MenuItem, Select, InputLabel, FormControl, FormHelperText } from '@mui/material';
+import { TextField, Button} from '@mui/material';
 import { attack } from '../../types/attack'
 import Grid from '@mui/material/Grid2';
 interface FormComponentProps {
