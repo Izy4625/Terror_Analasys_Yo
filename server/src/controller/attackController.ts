@@ -19,9 +19,8 @@ export const get_search_keywords_controller = async (req: Request,res: Response,
 export const create_new_attack_controller = async(req: Request,res: Response, next: NextFunction) =>{
     try{
           console.log('got to the controller for creating new attack', req.body)
-          const data1  = JSON.parse(req.body)
-          var data2 = data1[0]; 
-            const data = await createAttack(data2);
+        
+            const data = await createAttack(req.body);
             console.log(data)
             res.json(data)
     }

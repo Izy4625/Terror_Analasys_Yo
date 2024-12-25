@@ -32,8 +32,8 @@ const FormWithDialog: React.FC = () => {
   const handleClose = () => setOpen(false);
 
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleChange = (name: string, value: string| number) => {
+    
     setFormValues({
       ...formValues,
       [name]: value,
@@ -75,7 +75,7 @@ const FormWithDialog: React.FC = () => {
                   label="Country"
                   name="country_txt"
                   value={formValues.country_txt}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,e.target.value)}}
                   fullWidth
                   required
                 />
@@ -87,7 +87,7 @@ const FormWithDialog: React.FC = () => {
                   label="Group Name"
                   name="gname"
                   value={formValues.gname}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,e.target.value)}}
                   fullWidth
                   required
                 />
@@ -99,7 +99,7 @@ const FormWithDialog: React.FC = () => {
                   name="latitude"
                   type="number"
                   value={formValues.latitude}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,Number(e.target.value))}}
                   fullWidth
                   required
                 />
@@ -111,7 +111,7 @@ const FormWithDialog: React.FC = () => {
                   name="longitude"
                   type="number"
                   value={formValues.longitude}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,Number(e.target.value))}}
                   fullWidth
                   required
                 />
@@ -122,7 +122,7 @@ const FormWithDialog: React.FC = () => {
                   label="Attack Type"
                   name="attacktype1_txt"
                   value={formValues.attacktype1_txt}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,e.target.value)}}
                   fullWidth
                 />
               </Grid>
@@ -132,7 +132,7 @@ const FormWithDialog: React.FC = () => {
                   label="Target Type"
                   name="targtype1_txt"
                   value={formValues.targtype1_txt}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,e.target.value)}}
                   fullWidth
                 />
               </Grid>
@@ -143,7 +143,7 @@ const FormWithDialog: React.FC = () => {
                   label="Target"
                   name="target1"
                   value={formValues.target1}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,e.target.value)}}
                   fullWidth
                 />
               </Grid>
@@ -154,7 +154,7 @@ const FormWithDialog: React.FC = () => {
                   label="Weapon Type"
                   name="weaptype1_txt"
                   value={formValues.weaptype1_txt}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,e.target.value)}}
                   fullWidth
                 />
               </Grid>
@@ -165,7 +165,7 @@ const FormWithDialog: React.FC = () => {
                   name="nkill"
                   type="number"
                   value={formValues.nkill}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,Number(e.target.value))}}
                   fullWidth
                 />
               </Grid>
@@ -177,7 +177,7 @@ const FormWithDialog: React.FC = () => {
                   name="nwound"
                   type="number"
                   value={formValues.nwound}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,Number(e.target.value))}}
                   fullWidth
                 />
               </Grid>
@@ -189,7 +189,7 @@ const FormWithDialog: React.FC = () => {
                   name="nperps"
                   type="number"
                   value={formValues.nperps}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,Number(e.target.value))}}
                   fullWidth
                 />
               </Grid>
@@ -199,7 +199,7 @@ const FormWithDialog: React.FC = () => {
                   label="Summary"
                   name="summary"
                   value={formValues.summary}
-                  onChange={handleChange}
+                  onChange={(e)=>{handleChange(e.target.name,e.target.value)}}
                   fullWidth
                   multiline
                   rows={4}

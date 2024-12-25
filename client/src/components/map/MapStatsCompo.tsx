@@ -86,22 +86,6 @@ const MapStatsCompo = () => {
     <>
 
       <div>
-        <Box sx={{ m: 1, minWidth: 160 }}>
-          <FormControl size="medium">
-            <InputLabel id="demo-simple-select-label">Query</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={query}
-              label="Query"
-              onChange={handleChange}
-            >
-              <MenuItem value={0}>Get Regions With MOst Average Casualties per incidents</MenuItem>
-              <MenuItem value={1}>Top 5 Terror Oganazations in Region</MenuItem>
-              <MenuItem value={2}>Top Groups That caused the most casualties in a Region</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
         <div>
           <FormControl sx={{ m: 1, width: 300 }}>
             <InputLabel id="demo-multiple-name-label">Name</InputLabel>
