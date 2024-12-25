@@ -6,7 +6,7 @@ import { Popup } from 'react-leaflet'
 import "leaflet/dist/leaflet.css"
 import { country } from '../../types/country'
 import './styles.css'
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material'
 import styles from "./MapStatsCompo.module.css"

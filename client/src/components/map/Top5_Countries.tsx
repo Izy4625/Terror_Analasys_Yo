@@ -43,7 +43,7 @@ const Top5_Countries = () => {
                         Amount Killed : {mark.nkill} <br/>
                         Amount Injured : {mark.nwound} <br/>
                         Total Incidents : {mark.aincidents} <br/>
-                        Average Casualties per incident : {(Math.round(mark.average * 100) / 100).toFixed(2)}
+                        Average Casualties per incident : {mark.average}
 
                     </Popup>
                 </Marker>

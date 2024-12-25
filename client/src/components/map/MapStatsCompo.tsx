@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css"
 import './styles.css'
 import { attack } from '../../types/attack'
 import { useState, useEffect } from "react"
-import Box from '@mui/material/Box';
+
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -34,7 +34,7 @@ const MapStatsCompo = () => {
   const [data, setData] = useState<attack[]>([])
 
   const [kewWords, setKewWords] = useState<string[]>([])
-  const [query, setQuery] = useState('')
+
 
   const showForm = () => {
 
@@ -51,12 +51,7 @@ const MapStatsCompo = () => {
     );
   };
 
-  const handleChange = (event: SelectChangeEvent) => {
-    console.log('inside hadleChange')
-    setQuery(event.target.value as string);
-    // mapRef.current?.panTo(new L.LatLng(40.737, -73.923));
-   
-  };
+ 
 
   const getAllByKewWords = async () => {
     try {
