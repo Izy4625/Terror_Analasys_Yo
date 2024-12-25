@@ -23,7 +23,11 @@
         "mongoose": "^8.9.0",
         "nodemon": "^3.1.9",
         "socket-io": "^1.0.0",
+        "socket.io": "^4.8.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.7.2"
+    },
+    "devDependencies": {
+        "@types/socket.io": "^3.0.2"
     }
 }

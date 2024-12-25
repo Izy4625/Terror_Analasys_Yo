@@ -15,7 +15,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function ExampleRechart() {
- const socket = io('https://terror-analasys-yo.onrender.com')
+//  const socket = io('https://terror-analasys-yo.onrender.com')
     const [data, setData] = useState<attackTypes[]>([])
    
     const [isLoading, setIsLoading] = useState(true)
@@ -43,15 +43,15 @@ export default function ExampleRechart() {
     //         setIsLoading(false);
     //     }
     // };
-    socket.on('newattack',()=>{
+    // socket.on('newattack',()=>{
 
-      getAttackTypesData()
-    })
+    //   getAttackTypesData()
+    // })
     useEffect(()=>{
        
         getAttackTypesData()
         
-        
+
            
         
     },[])
