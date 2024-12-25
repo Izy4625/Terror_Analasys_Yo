@@ -1,6 +1,7 @@
 import { AttackTypeModel } from "../models/attackTypesModel"
 import { CountryModel } from "../models/countryModel"
 import { YearStatsModel } from "../models/yearStatsMOdel"
+import { country } from "../types/country"
 
 export const get_attack_type_service = async (types?: string[]) => {
     try {
@@ -42,17 +43,14 @@ export const get_incident_trends = async(year: number,months: number)=>{
         throw err
     }
 }
-export const get_top5_groups = async(area: string,limit?:number)=>{
+export const get_top5_groups = async(area: string)=>{
     try{
-        if(limit){
-        const data = await CountryModel.find({cname: area}).populate('tgroups' ,{ sort: { 'aincidents': -1 } }).limit(limit * 2).exec()
+   
+        const data  = await CountryModel.find({cname: area}).populate('tgroups', 'aincidents gname -_id').limit(5).exec()
+ 
         return data
     }
-    else{
-        const data = await CountryModel.find({cname: area}).populate('tgroups' ,{ sort: { 'aincidents': -1 } }).limit(5).exec()
-        return data
-    }
-    }
+    
     catch (err) {
         console.log(err)
         throw err

@@ -48,7 +48,7 @@ const FormWithDialog: React.FC = () => {
         headers: {
           'Content-type': 'application/json',
         },
-        body: JSON.stringify(formValues),
+        body: JSON.stringify({formValues}),
       });
       const data = await res.json();
       console.log(data)

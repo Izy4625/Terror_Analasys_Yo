@@ -1,11 +1,12 @@
 
-
+import {group} from "./group"
 export interface country {
     cname: string,
-    nkill: number,
-    nwound: number,
-    aincidents: number,
-    average: number,
+    nkill?: number,
+    nwound?: number,
+    aincidents?: number,
+    average?: number,
     latitude: number,
-    longitude:number
+    longitude:number,
+    tgroup: group[] 
 }
