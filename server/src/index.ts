@@ -10,6 +10,9 @@ const app = express();
 connectDB()
 const httpServer = createServer(app);
 export const io = new Server(httpServer, { cors: { origin: "*", methods: "*", credentials: true } });
+io.on('connection',()=>{
+  console.log('new user connected')
+})
 app.use(
     cors({
       origin:["http://localhost:5173" ,'https://client-anlaysis.onrender.com',"*"],

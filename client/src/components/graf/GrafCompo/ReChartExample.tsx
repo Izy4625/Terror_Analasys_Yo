@@ -12,10 +12,22 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { Socket } from "socket.io-client";
 
 export default function ExampleRechart() {
-//  const socket = io('https://terror-analasys-yo.onrender.com')
+  const [socket, setSocket] = useState<Socket>()
+  useEffect(()=>{
+    const socket = io('http://localhost:3001')
+    socket.on('connection',()=>{
+      console.log('connected')
+    })
+    setSocket(socket)
+    socket.disconnect()
+    socket.off()
+  },[])
+  socket?.on('newattack',()=>{
+    getAttackTypesData()
+  })
     const [data, setData] = useState<attackTypes[]>([])
    
     const [isLoading, setIsLoading] = useState(true)
