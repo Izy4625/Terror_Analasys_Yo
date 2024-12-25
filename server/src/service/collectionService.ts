@@ -130,6 +130,12 @@ const handleAttackTypes = async (newattack: attack) => {
     
     try {
         const attacktype = await AttackTypeModel.findOne({ atype: newattack.attacktype1_txt })
+        if (isNaN(newattack.nkill)) {
+            newattack.nkill = 3; // Assign a default or fallback value
+          }
+          if (isNaN(newattack.nwound)) {
+            newattack.nwound = 3; // Assign a default or fallback value
+          }
         if (attacktype) {
             attacktype.nkill += newattack.nkill;
             attacktype.nwound += newattack.nwound;
