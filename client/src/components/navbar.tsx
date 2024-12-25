@@ -12,11 +12,11 @@ const Navbar = () => {
    
     
   return (
-    <AppBar position="static" sx={{ bgcolor: "primary.main" }}>
+    <AppBar position="static" sx={{ bgcolor: "#6c757d" }}>
       <Toolbar>
        
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          My App
+          Analisis of Global Terrorism
         </Typography>
 
         <Box>
