@@ -16,7 +16,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ExampleRechart() {
   
-  const socket3 = io('http://localhost:3001')
+  const socket3 = io('https://terror-analasys-yo.onrender.com')
   
 
   socket3?.on('newattack',()=>{
