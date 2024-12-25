@@ -13,12 +13,7 @@ export const io = new Server(httpServer, { cors: { origin: "*", methods: "*", cr
 io.on('connection',()=>{
   console.log('new user connected')
 })
-app.use(
-    cors({
-      origin:["http://localhost:5173" ,'https://client-anlaysis.onrender.com',"*"],
-      credentials: true,
-    })
-  );
+app.use(cors())
  
 app.use(express.json());
 app.use('/api/analysis',analysisRoute)

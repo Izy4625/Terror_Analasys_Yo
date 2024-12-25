@@ -12,20 +12,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import CircularProgress from '@mui/material/CircularProgress';
-import { Socket } from "socket.io-client";
+
 
 export default function ExampleRechart() {
-  const [socket, setSocket] = useState<Socket>()
-  useEffect(()=>{
-    const socket = io('http://localhost:3001')
-    socket.on('connection',()=>{
-      console.log('connected')
-    })
-    setSocket(socket)
-    socket.disconnect()
-    socket.off()
-  },[])
-  socket?.on('newattack',()=>{
+  
+  const socket3 = io('http://localhost:3001')
+  
+
+  socket3?.on('newattack',()=>{
     getAttackTypesData()
   })
     const [data, setData] = useState<attackTypes[]>([])
