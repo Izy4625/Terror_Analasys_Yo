@@ -8,5 +8,5 @@ export interface country {
     average?: number,
     latitude: number,
     longitude:number,
-    tgroup: group[] 
+    tgroups: group[] 
 }

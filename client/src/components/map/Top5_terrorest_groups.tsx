@@ -9,17 +9,20 @@ import './styles.css'
 import { useState, useEffect } from "react"
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material'
-
+import styles from "./MapStatsCompo.module.css"
 
 const Top5_Groups = () => {
     const [country, setCountry] = useState('')
     const [data, setData] = useState<country[]>([])
-
+    const [amount, setAmount] = useState(5)
     function removeDuplicates(arr: group[]): group[] {
+        console.log('hey fellows')
         return arr.reduce((unique: group[], item) => {
+            console.log(unique, item)
             if (!unique.find((obj : group) => obj.gname=== item.gname)) {
                 unique.push(item);
             }
+            console.log(unique)
             return unique;
         }, []);
     }
@@ -31,26 +34,31 @@ const Top5_Groups = () => {
   
     const get_Top5_Terrorist_groups = async () => {
         try {
-            const res = await fetch('https://terror-analasys-yo.onrender.com/api/attacks/all/search', {
+            const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/relationships/top-groups', {
                 method: 'post',
                 headers: {
                   'Content-type': 'application/json',
                 },
                 body: JSON.stringify({ area: country }),
               });
-            const data = await res.json();
-            const groups: group[] = data.tgroups
-            const newGropus = removeDuplicates(groups)
-            data.tgroups = newGropus
-            data.tgroups.sort((a: group, b: group) => {
+            const data : country[] = await res.json();
+            console.log(data)
+            const groups: group[] = data[0].tgroups
+            console.log(data[0].tgroups)
+            console.log('this is the ', groups)
+            const newGropus = removeDuplicates(data[0].tgroups)
+            console.log(newGropus)
+            data[0].tgroups = newGropus
+            data[0].tgroups.sort((a: group, b: group) => {
                 if (a.aincidents < b.aincidents) {
-                    return -1;
+                    return 1;
                 }
                 if (a.aincidents > b.aincidents) {
-                    return 1;
+                    return -1;
                 }
                 return 0;
             });
+            console.log(data)
             setData(data);
             // setIsLoading(false);
         } catch (err) {
@@ -67,6 +75,7 @@ const Top5_Groups = () => {
             margin: "5px"
             }}>
    <TextField id="outlined-basic" label="Outlined" placeholder="enter Country" onChange={(e)=>{setCountry(e.target.value)}} variant="outlined" />
+    <TextField label='Outlined' type='Number' placeholder='Enter Amount OF terrorist Groups' onChange={(e)=>{setAmount(Number(e.target.value))}} variant='outlined'/>
     <Button onClick={handleClick}>Send</Button>
    </div>
         <MapContainer center={[37.005105,-89.176269]} zoom={13} scrollWheelZoom={false}>
@@ -77,12 +86,14 @@ const Top5_Groups = () => {
             {data.map((mark)=>(
                 <Marker position={[mark.latitude, mark.longitude]}>
                     <Popup>
+                        <div className={styles.popupcontainer}>
                         Country : {mark.cname} <br/>
                         
-                       {mark.tgroup.map((g)=>(<div>
-                        <p><strong>Group Name:</strong> {g.gname}</p>
-                        <p><strong>Group Amount Of Incidents:</strong> {g.aincidents}</p>
+                       {mark.tgroups.slice(0, amount).map((g)=>(<div>
+                        <p><strong>Group Name:</strong> {g.gname} : Incidents : {g.aincidents} </p>
+                       
                        </div>))}
+                       </div>
 
                     </Popup>
                 </Marker>
