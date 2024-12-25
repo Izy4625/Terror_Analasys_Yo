@@ -4,9 +4,12 @@ import { Request,Response } from 'express';
 import connectDB from './config/db';
 import analysisRoute from './routes/analysis.route';
 import attackRouter from './routes/attacks.route';
+import { Server } from 'socket.io';
+import { createServer } from 'http';
 const app = express();
 connectDB()
-
+const httpServer = createServer(app);
+export const io = new Server(httpServer, { cors: { origin: "*", methods: "*", credentials: true } });
 app.use(
     cors({
       origin:["http://localhost:5173" ,'https://client-anlaysis.onrender.com',"*"],
@@ -24,6 +27,6 @@ app.use(async (req: Request, res: Response) => {
 });
 
 
-app.listen(3001, () => {
+httpServer.listen(3001, () => {
     console.log("server is up on 3001")
 });

@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import { attackTypes } from "../../../types/attackTypes";
-
+import io from "socket.io-client";
 import {
   BarChart,
   Bar,
@@ -15,7 +15,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function ExampleRechart() {
-
+ const socket = io('https://terror-analasys-yo.onrender.com')
     const [data, setData] = useState<attackTypes[]>([])
    
     const [isLoading, setIsLoading] = useState(true)
@@ -30,6 +30,7 @@ export default function ExampleRechart() {
             setIsLoading(false);
         }
     };
+
     // const getIncidentsTrendsData = async () => {
     //     try {
     //         const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/incident-trends');
@@ -42,9 +43,14 @@ export default function ExampleRechart() {
     //         setIsLoading(false);
     //     }
     // };
+    socket.on('newattack',()=>{
+
+      getAttackTypesData()
+    })
     useEffect(()=>{
        
         getAttackTypesData()
+        
         
            
         
