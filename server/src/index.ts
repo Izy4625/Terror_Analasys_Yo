@@ -10,7 +10,7 @@ const app = express();
 connectDB()
 const httpServer = createServer(app);
 export const io = new Server(httpServer, { cors: { origin: "*", methods: "*", credentials: true } });
-io.on('connection',()=>{
+io.on('connection',() => {
   console.log('new user connected')
 })
 app.use(cors())
