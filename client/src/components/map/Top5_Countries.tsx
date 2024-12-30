@@ -15,7 +15,7 @@ const Top5_Countries = () => {
   
     const get_Top5_Countries = async () => {
         try {
-            const res = await fetch('https://terror-analasys-yo.onrender.com/api/analysis/highest-casualty-countries');
+            const res = await fetch('http://localhost:3001/api/analysis/highest-casualty-countries');
             const data = await res.json();
             setData(data);
             // setIsLoading(false);
